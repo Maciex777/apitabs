@@ -1,14 +1,19 @@
+#apitabs-tabs{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 #apitabs-tabs ul{
   list-style: none;
   border-bottom: 1px solid;
   margin-bottom: 2em;
+  padding: 0 60px;
 }
 #apitabs-tabs ul li{
   display: inline;
   margin: 0 4px;
 }
 #apitabs-tabs ul li button{
-  width: 90px;
   color: rgba(0, 0, 0, 0.9);
   font-family: "Work Sans", sans-serif;
   font-weight: 300;
@@ -16,7 +21,7 @@
   border: 1px solid rgba(0, 0, 0, 0.9);
   border-bottom: 0;
   border-radius: 4px 4px 0 0;
-  padding: 8px 0;
+  padding: 8px 12px;
   cursor: pointer;
 }
 #apitabs-tabs ul li button:hover {
@@ -27,8 +32,16 @@
   -ms-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-#apitabs-tabs ul li button.active {
+#apitabs-tabs ul li.active button {
   background: rgba(0, 0, 0, 0.9);
   color: #fdfcfc;
   font-weight: 500;
+}
+#apitabs-posts-container{
+  padding: 10px 50px;
+}
+#apitabs-posts-container .apitabs-article{
+  box-shadow: 0px 5px 10px rgba(90, 116, 148, 0.3);
+  padding: 30px;
+  border-radius: 6px;
 }

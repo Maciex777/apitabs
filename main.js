@@ -9,6 +9,8 @@ $(document).ready(function(){
     // po kliknięciu na tab z kategorią
     apitabsTabs.on('click', function(){
       apitabsPostsContainer.html('');
+      apitabsTabs.removeClass(' active');
+      $(this).addClass(' active');
       var itemNumber = $(this).attr("data-id");
       // var itemClass = $(this).attr("class");
       // var itemNumber = itemClass.replace('cat-item cat-item-','');
@@ -16,11 +18,11 @@ $(document).ready(function(){
       const ourRequest = new XMLHttpRequest();
       let endpoint;
       if (itemNumber == 'all') {
-        endpoint = document.location.origin + '/wp-json/wl/v1/posts';
+        endpoint = document.location.origin + '/wp-json/apitabs/v1/posts';
       } else {
-        endpoint = document.location.origin + '/wp-json/wl/v1/posts/categories=' + itemNumber;
+        endpoint = document.location.origin + '/wp-json/apitabs/v1/posts/categories=' + itemNumber;
       }
-      console.log(endpoint);
+      // console.log(endpoint);
       ourRequest.open('GET', endpoint);
       ourRequest.onload = function() {
         if (ourRequest.status >= 200 && ourRequest.status < 400) {
@@ -43,10 +45,12 @@ $(document).ready(function(){
 // wyrzucenie listy wpisów
 function createHTML(postsData){
   let ourHTMLString = '';
-  console.log(postsData);
+  // console.log(postsData);
   for (let i = 0; i < postsData.length; i++) {
+    ourHTMLString += '<div class="apitabs-article">';
     ourHTMLString += '<h2>' + postsData[i].title + '</h2>';
     ourHTMLString += postsData[i].content;
+    ourHTMLString += '</div>';
   }
   apitabsPostsContainer.html(ourHTMLString);
 }

@@ -17,9 +17,9 @@ define( 'APITABS_URL', plugin_dir_url( __FILE__ ) );
 /**
   * Podpięcie skryptów
   */
-function wlapi_load_scripts(){
+function apitabs_load_scripts(){
   wp_enqueue_script('apitabs-script', APITABS_URL . 'main.js', array('jquery'));
-  wp_enqueue_style('resconbop_style', APITABS_URL . 'style.css');
+  wp_enqueue_style('apitabs-style', APITABS_URL . 'style.css');
 }
 add_action('wp_enqueue_scripts', 'apitabs_load_scripts');
 
@@ -92,7 +92,7 @@ function throw_posts_data($args){
   foreach($posts as $post){
     $data[$i]['id'] = $post->ID;
     $data[$i]['title'] = $post->post_title;
-    $data[$i]['content'] = $post->post_content;
+    $data[$i]['content'] = wp_trim_words($post->post_content, 70, '...');
     $data[$i]['slug'] = $post->post_name;
     $data[$i]['featured_image']['thumbnail'] = get_the_post_thumbnail_url($post->ID, 'thumbnail');
     $data[$i]['featured_image']['medium'] = get_the_post_thumbnail_url($post->ID, 'medium');
@@ -118,7 +118,7 @@ function apitabs_show_content(){
   $output = '';
   // $output .= '<div id="apitabs-tabs">'.$postsList.'</div>';
   $output .= '<div id="apitabs-tabs"><ul>';
-  $output .= '<li class="cat-item" data-id="all">Wszystkie</li>';
+  $output .= '<li class="cat-item" data-id="all"><button>Wszystkie</button></li>';
   $categories = get_categories();
   foreach ( $categories as $category ) :
      $output .= '<li class="cat-item" data-id="'.$category->cat_ID.'"><button>'.$category->name.'</button></li>';
