@@ -14,7 +14,12 @@ $(document).ready(function(){
       // var itemNumber = itemClass.replace('cat-item cat-item-','');
       // console.log(itemNumber);
       const ourRequest = new XMLHttpRequest();
-      let endpoint = document.location.origin + '/wp-json/wl/v1/posts/categories=' + itemNumber;
+      let endpoint;
+      if (itemNumber == 'all') {
+        endpoint = document.location.origin + '/wp-json/wl/v1/posts';
+      } else {
+        endpoint = document.location.origin + '/wp-json/wl/v1/posts/categories=' + itemNumber;
+      }
       console.log(endpoint);
       ourRequest.open('GET', endpoint);
       ourRequest.onload = function() {

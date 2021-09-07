@@ -19,6 +19,7 @@ define( 'APITABS_URL', plugin_dir_url( __FILE__ ) );
   */
 function wlapi_load_scripts(){
   wp_enqueue_script('apitabs-script', APITABS_URL . 'main.js', array('jquery'));
+  wp_enqueue_style('resconbop_style', APITABS_URL . 'style.css');
 }
 add_action('wp_enqueue_scripts', 'apitabs_load_scripts');
 
@@ -79,6 +80,9 @@ function apitabs_categories($request){
    return throw_posts_data($args);
 }
 
+/**
+  * Wyrzucenie konkretnych danych dla własnego endpointa
+  */
 function throw_posts_data($args){
   $posts = get_posts($args);
 
@@ -114,9 +118,10 @@ function apitabs_show_content(){
   $output = '';
   // $output .= '<div id="apitabs-tabs">'.$postsList.'</div>';
   $output .= '<div id="apitabs-tabs"><ul>';
+  $output .= '<li class="cat-item" data-id="all">Wszystkie</li>';
   $categories = get_categories();
   foreach ( $categories as $category ) :
-     $output .= '<li class="cat-item" data-id="'.$category->cat_ID.'">'.$category->name.'</li>';
+     $output .= '<li class="cat-item" data-id="'.$category->cat_ID.'"><button>'.$category->name.'</button></li>';
   endforeach;
   $output .= '</ul></div>';
   $output .= '<div id="apitabs-posts-container"></div>';
@@ -124,8 +129,8 @@ function apitabs_show_content(){
   return $output;
 }
 
-
-function wlapi_shortcodes_init()
+// zainicjowanie shortcode [apitabs]
+function apitabs_shortcodes_init()
 {
     add_shortcode('apitabs', 'apitabs_show_content');
 }
