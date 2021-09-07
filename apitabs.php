@@ -110,10 +110,15 @@ function throw_posts_data($args){
   * utwórzenie shortcode, aby wyświetlić w nim tabsy i ich zawartość
   */
 function apitabs_show_content(){
-  $postsList = wp_list_categories('echo=0&show_count=1&title_li=<h2>Categories</h2>');
-
+  // $postsList = wp_list_categories('echo=0&show_count=1&title_li=<h2>Categories</h2>');
   $output = '';
-  $output .= '<div id="apitabs-tabs">'.$postsList.'</div>';
+  // $output .= '<div id="apitabs-tabs">'.$postsList.'</div>';
+  $output .= '<div id="apitabs-tabs"><ul>';
+  $categories = get_categories();
+  foreach ( $categories as $category ) :
+     $output .= '<li class="cat-item" data-id="'.$category->cat_ID.'">'.$category->name.'</li>';
+  endforeach;
+  $output .= '</ul></div>';
   $output .= '<div id="apitabs-posts-container"></div>';
 
   return $output;

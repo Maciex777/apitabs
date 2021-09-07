@@ -9,8 +9,9 @@ $(document).ready(function(){
     // po kliknięciu na tab z kategorią
     apitabsTabs.on('click', function(){
       apitabsPostsContainer.html('');
-      var itemClass = $(this).attr("class");
-      var itemNumber = itemClass.replace('cat-item cat-item-','');
+      var itemNumber = $(this).attr("data-id");
+      // var itemClass = $(this).attr("class");
+      // var itemNumber = itemClass.replace('cat-item cat-item-','');
       // console.log(itemNumber);
       const ourRequest = new XMLHttpRequest();
       let endpoint = document.location.origin + '/wp-json/wl/v1/posts/categories=' + itemNumber;
