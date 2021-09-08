@@ -15,12 +15,13 @@ $(document).ready(function(){
       // var itemClass = $(this).attr("class");
       // var itemNumber = itemClass.replace('cat-item cat-item-','');
       // console.log(itemNumber);
+      const siteUrl = WPURLS.siteurl;
       const ourRequest = new XMLHttpRequest();
       let endpoint;
       if (itemNumber == 'all') {
-        endpoint = document.location.origin + '/wp-json/apitabs/v1/posts';
+        endpoint = siteUrl + '/wp-json/apitabs/v1/posts';
       } else {
-        endpoint = document.location.origin + '/wp-json/apitabs/v1/posts/categories=' + itemNumber;
+        endpoint = siteUrl + '/wp-json/apitabs/v1/posts/categories=' + itemNumber;
       }
       // console.log(endpoint);
       ourRequest.open('GET', endpoint);

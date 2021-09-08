@@ -18,8 +18,11 @@ define( 'APITABS_URL', plugin_dir_url( __FILE__ ) );
   * Podpięcie skryptów
   */
 function apitabs_load_scripts(){
-  wp_enqueue_script('apitabs-script', APITABS_URL . 'main.js', array('jquery'));
+  wp_enqueue_script('apitabs-script', APITABS_URL . 'main.js', array('jquery'), false, true);
   wp_enqueue_style('apitabs-style', APITABS_URL . 'style.css');
+
+  // pobranie URL strony do globalnej zmiennej javascript
+  wp_localize_script('apitabs-script', 'WPURLS', array( 'siteurl' => get_option('siteurl') ));
 }
 add_action('wp_enqueue_scripts', 'apitabs_load_scripts');
 
